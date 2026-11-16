@@ -1,0 +1,20 @@
+{
+  "name": "ultra-plugins",
+  "description": "Ultra plugins for AI assistants.",
+  "owner": {
+    "name": "Ultra",
+    "email": "support@i.ultramcp.com",
+    "url": "https://www.ultramcp.com"
+  },
+  "metadata": {
+    "description": "Ultra plugins for AI assistants. The plugin package is this repository.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "ultra",
+      "source": "./",
+      "description": "Connects an AI assistant to an Ultra workspace so it can search team knowledge, use shared skills, and create or find work cards."
+    }
+  ]
+}

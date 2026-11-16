@@ -1,0 +1,31 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.ultramcp/ultra",
+  "title": "Ultra",
+  "description": "Search an Ultra workspace for team knowledge, shared skills, and work cards.",
+  "version": "1.0.0",
+  "websiteUrl": "https://www.ultramcp.com",
+  "repository": {
+    "url": "https://github.com/ultramcp/ultra-plugins",
+    "source": "github",
+    "id": "1460641842"
+  },
+  "icons": [
+    {
+      "src": "https://www.ultramcp.com/logo-square.png",
+      "mimeType": "image/png",
+      "sizes": ["1024x1024"]
+    },
+    {
+      "src": "https://www.ultramcp.com/logo-square-512.png",
+      "mimeType": "image/png",
+      "sizes": ["512x512"]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://www.ultramcp.com/mcp"
+    }
+  ]
+}

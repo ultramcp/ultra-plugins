@@ -1,0 +1,19 @@
+{
+  "name": "ultra",
+  "displayName": "Ultra",
+  "version": "1.0.0",
+  "description": "Connects an AI assistant to an Ultra workspace so it can search team knowledge, use shared skills, and create or find work cards.",
+  "author": {
+    "name": "Ultra",
+    "email": "support@i.ultramcp.com"
+  },
+  "publisher": "Ultra",
+  "homepage": "https://www.ultramcp.com",
+  "repository": "https://github.com/ultramcp/ultra-plugins",
+  "license": "MIT",
+  "keywords": ["ultra", "mcp", "knowledge", "skills", "workspace", "work-cards"],
+  "category": "productivity",
+  "tags": ["knowledge", "mcp", "workspace"],
+  "logo": "assets/logo.png",
+  "skills": "./skills/"
+}
