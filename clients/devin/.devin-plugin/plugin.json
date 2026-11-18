@@ -1,0 +1,18 @@
+{
+  "name": "ultra",
+  "displayName": "Ultra",
+  "version": "1.0.0",
+  "description": "Search an Ultra workspace for team knowledge, shared skills, and work cards.",
+  "homepage": "https://www.ultramcp.com",
+  "repository": "https://github.com/ultramcp/ultra-plugins",
+  "license": "MIT",
+  "keywords": ["ultra", "mcp", "knowledge", "skills", "workspace", "work-cards"],
+  "mcpServers": {
+    "ultra": {
+      "url": "https://www.ultramcp.com/mcp",
+      "transport": "http",
+      "tokenScope": "user",
+      "description": "Ultra workspace for team knowledge, shared skills, and work cards."
+    }
+  }
+}
