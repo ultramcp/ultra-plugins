@@ -1,0 +1,78 @@
+name: Gemini extension archive
+
+on:
+  pull_request:
+  workflow_dispatch:
+  push:
+    tags:
+      - "gemini-v*"
+
+permissions:
+  contents: read
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build ultra.tar.gz with the manifest at the archive root
+        run: |
+          set -euo pipefail
+          stage="$(mktemp -d)"
+          cp clients/gemini/gemini-extension.json clients/gemini/GEMINI.md clients/gemini/README.md "$stage/"
+          tar -C "$stage" -czf ultra.tar.gz gemini-extension.json GEMINI.md README.md
+          python3 - <<'PY'
+          import json
+          import tarfile
+
+          with tarfile.open("ultra.tar.gz") as archive:
+              names = archive.getnames()
+              manifest_file = archive.extractfile("gemini-extension.json")
+              if manifest_file is None:
+                  raise SystemExit("gemini-extension.json is not at the archive root")
+              manifest = json.load(manifest_file)
+
+          if any("/" in name for name in names):
+              raise SystemExit(f"archive entries must sit at the root: {names}")
+
+          server = manifest["mcpServers"]["UltraMCP"]
+          if server.get("httpUrl") != "https://www.ultramcp.com/mcp":
+              raise SystemExit("UltraMCP httpUrl is missing")
+          if server.get("oauth", {}).get("enabled") is not True:
+              raise SystemExit("OAuth is not enabled")
+          if "clientSecret" in json.dumps(manifest) or "apiKey" in json.dumps(manifest):
+              raise SystemExit("manifest contains a secret field")
+          print("archive ok", names)
+          PY
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ultra-gemini-extension
+          path: ultra.tar.gz
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/gemini-v')
+    needs: archive
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: ultra-gemini-extension
+          path: .
+
+      - name: Publish the archive on the gemini-v tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          tag="${GITHUB_REF_NAME}"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release upload "$tag" ultra.tar.gz --clobber
+          else
+            gh release create "$tag" ultra.tar.gz \
+              --title "Gemini CLI extension ${tag}" \
+              --notes "Archive of the Ultra Gemini CLI extension. gemini-extension.json is at the archive root. The manifest contains no API key."
+          fi

@@ -1,0 +1,14 @@
+{
+  "name": "ultra",
+  "version": "1.0.0",
+  "description": "Connects Gemini CLI to an Ultra workspace so it can search team knowledge, use shared skills, and create or find work cards.",
+  "contextFileName": "GEMINI.md",
+  "mcpServers": {
+    "UltraMCP": {
+      "httpUrl": "https://www.ultramcp.com/mcp",
+      "oauth": {
+        "enabled": true
+      }
+    }
+  }
+}
