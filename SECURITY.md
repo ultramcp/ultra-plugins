@@ -8,6 +8,6 @@ Please use that address for security reports. A public GitHub issue can expose t
 
 ## What this repository contains
 
-This repository is the install package for the Ultra plugin. The MCP server runs at `https://www.ultramcp.com/mcp`. Each person signs in with OAuth. The package contains no API keys, tokens, or other secrets.
+This repository is the install package for the Ultra plugin, plus setup files for other MCP clients. The MCP server runs at `https://www.ultramcp.com/mcp`. Each person signs in with OAuth. The package contains no API keys, tokens, or other secrets.
 
 Supported version: 1.0.x.
